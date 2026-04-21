@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.vinrecipe.controller.LoginController"
+            styleClass="login-root">
+
+    <!-- Card panel centered -->
+    <VBox styleClass="login-card" alignment="CENTER" spacing="16"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+          maxWidth="360" maxHeight="520">
+
+        <padding><Insets top="40" bottom="40" left="36" right="36"/></padding>
+
+        <!-- Logo -->
+        <Label text="🍽" style="-fx-font-size: 48px;" alignment="CENTER" maxWidth="Infinity"/>
+        <Label text="VinRECIPE" styleClass="login-app-name" alignment="CENTER" maxWidth="Infinity"/>
+        <Label text="Smart Recipe &amp; Grocery Planner" styleClass="login-tagline"
+               alignment="CENTER" maxWidth="Infinity"/>
+
+        <Separator style="-fx-padding: 4 0;"/>
+
+        <!-- Username -->
+        <VBox spacing="4">
+            <Label text="Username" styleClass="form-label"/>
+            <TextField fx:id="usernameField" promptText="Enter your username"
+                       styleClass="form-field" maxWidth="Infinity"/>
+        </VBox>
+
+        <!-- Password -->
+        <VBox spacing="4">
+            <Label text="Password" styleClass="form-label"/>
+            <StackPane>
+                <PasswordField fx:id="passwordField" promptText="Enter your password"
+                               styleClass="form-field" maxWidth="Infinity"/>
+                <TextField fx:id="passwordVisible" promptText="Enter your password"
+                           styleClass="form-field" maxWidth="Infinity"
+                           visible="false" managed="false"/>
+                <Button fx:id="togglePasswordBtn" text="👁" onAction="#togglePassword"
+                        style="-fx-background-color: transparent; -fx-cursor: hand; -fx-font-size: 14; -fx-padding: 0 6 0 0;"
+                        StackPane.alignment="CENTER_RIGHT"
+                        minWidth="32" maxWidth="32"/>
+            </StackPane>
+        </VBox>
+
+        <!-- Email (register only) — hidden by default -->
+        <Label fx:id="emailLabel" text="Email" styleClass="form-label"
+               visible="false" managed="false"/>
+        <TextField fx:id="emailField" promptText="your@email.com"
+                   styleClass="form-field" maxWidth="Infinity"
+                   visible="false" managed="false"/>
+
+        <!-- Status message -->
+        <Label fx:id="statusLabel" wrapText="true" maxWidth="Infinity"
+               alignment="CENTER" styleClass="status-label"/>
+
+        <!-- Action buttons -->
+        <Button fx:id="loginBtn" text="Log In" onAction="#handleLogin"
+                styleClass="btn-primary" maxWidth="Infinity" prefHeight="40"/>
+
+        <Button fx:id="registerBtn" text="Register" onAction="#handleRegister"
+                styleClass="btn-secondary" maxWidth="Infinity" prefHeight="36"/>
+
+        <!-- Toggle link -->
+        <Label fx:id="toggleLabel" text="New here? Register"
+               styleClass="toggle-link" onMouseClicked="#toggleMode"
+               alignment="CENTER" maxWidth="Infinity"/>
+
+    </VBox>
+
+</AnchorPane>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.RecipeDetailController"
+      styleClass="view-root" spacing="16">
+
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+
+    <!-- Header: title + back button -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Button text="← Back" onAction="#handleBack" styleClass="btn-outline"/>
+        <Label fx:id="titleLabel" text="Recipe Title" styleClass="page-title" HBox.hgrow="ALWAYS"
+               wrapText="true"/>
+        <Button fx:id="editBtn" text="✏ Edit" onAction="#handleEdit" styleClass="btn-primary"/>
+        <Button fx:id="deleteBtn" text="🗑 Delete" onAction="#handleDelete" styleClass="btn-danger"/>
+    </HBox>
+
+    <!-- Meta row -->
+    <HBox spacing="24" styleClass="detail-meta">
+        <Label fx:id="ratingLabel" styleClass="detail-rating"/>
+        <Label fx:id="timeLabel"   styleClass="detail-meta-label"/>
+        <Label fx:id="servingsLabel" styleClass="detail-meta-label"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="authorLabel" styleClass="detail-author"/>
+    </HBox>
+
+    <!-- Tags -->
+    <Label fx:id="tagsLabel" styleClass="detail-tags" wrapText="true"/>
+
+    <Separator/>
+
+    <!-- Main content: ingredients (left 35%) + instructions (right 65%) -->
+    <HBox spacing="20" VBox.vgrow="ALWAYS">
+
+        <!-- Ingredients panel -->
+        <VBox spacing="8" prefWidth="280" styleClass="ingredients-panel">
+            <Label text="🧾 Ingredients" styleClass="section-label"/>
+            <ListView fx:id="ingredientList" VBox.vgrow="ALWAYS" styleClass="ingredient-list"/>
+        </VBox>
+
+        <!-- Instructions panel -->
+        <VBox spacing="8" HBox.hgrow="ALWAYS" styleClass="instructions-panel">
+            <Label text="📋 Instructions" styleClass="section-label"/>
+            <TextArea fx:id="instructionsArea" wrapText="true"
+                      styleClass="instructions-area" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
+    </HBox>
+
+</VBox>

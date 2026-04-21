@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.ShoppingListController"
+      styleClass="view-root" spacing="16">
+
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+
+    <!-- Header -->
+    <Label text="🛒 Shopping List" styleClass="page-title"/>
+    <Label fx:id="instructionLabel" text="Search and add ingredients to your cart"
+           styleClass="page-subtitle" wrapText="true"/>
+
+    <!-- Main 3-column layout -->
+    <HBox VBox.vgrow="ALWAYS" spacing="16">
+
+        <!-- LEFT: Ingredient Search Panel -->
+        <VBox spacing="8" styleClass="section-box" HBox.hgrow="ALWAYS" prefWidth="320">
+            <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+            <Label text="🔍 Find Ingredients" styleClass="section-label"/>
+            <HBox spacing="8">
+                <TextField fx:id="searchField" promptText="Search ingredient..."
+                           styleClass="form-field" HBox.hgrow="ALWAYS"
+                           onKeyReleased="#handleSearch"/>
+                <Button text="Search" onAction="#handleSearch" styleClass="btn-outline"/>
+            </HBox>
+
+            <!-- Quantity + Unit row -->
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Qty:" styleClass="form-label"/>
+                <TextField fx:id="quantityField" promptText="1" prefWidth="60"
+                           styleClass="form-field"/>
+                <TextField fx:id="unitField" promptText="g / pcs / ml"
+                           styleClass="form-field" HBox.hgrow="ALWAYS"/>
+                <Button text="➕ Add" onAction="#handleAddIngredient" styleClass="btn-primary"/>
+            </HBox>
+
+            <Label text="Available Ingredients" styleClass="form-label"/>
+            <ListView fx:id="ingredientSearchList" VBox.vgrow="ALWAYS" styleClass="selection-list"/>
+        </VBox>
+
+        <!-- RIGHT: Cart Panel -->
+        <VBox spacing="8" styleClass="section-box" HBox.hgrow="ALWAYS">
+            <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+
+            <HBox alignment="CENTER_LEFT" spacing="12">
+                <Label text="🧾 My Cart" styleClass="section-label" HBox.hgrow="ALWAYS"/>
+                <Button text="🗑 Clear All" onAction="#handleClear" styleClass="btn-outline"/>
+            </HBox>
+
+            <!-- Cart Table -->
+            <TableView fx:id="cartTable" VBox.vgrow="ALWAYS" styleClass="shopping-list">
+                <columns>
+                    <TableColumn fx:id="colName"     text="Ingredient" prefWidth="180"/>
+                    <TableColumn fx:id="colQty"      text="Quantity"   prefWidth="80"/>
+                    <TableColumn fx:id="colUnit"     text="Unit"       prefWidth="70"/>
+                    <TableColumn fx:id="colPrice"    text="Price (VND)" prefWidth="120"/>
+                    <TableColumn fx:id="colRemove"   text=""            prefWidth="50"/>
+                </columns>
+            </TableView>
+
+            <!-- Total row -->
+            <HBox alignment="CENTER_RIGHT" spacing="16">
+                <Label text="Total Estimated Cost:" styleClass="section-label"/>
+                <Label fx:id="totalPriceLabel" text="0 VND" styleClass="price-label"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2ECC71;"/>
+            </HBox>
+        </VBox>
+
+    </HBox>
+
+</VBox>

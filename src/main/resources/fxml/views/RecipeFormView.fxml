@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.cell.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.RecipeFormController"
+      styleClass="view-root" spacing="12">
+
+    <padding><Insets top="20" bottom="20" left="24" right="24"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label fx:id="formTitleLabel" text="Add New Recipe" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Button text="✓ Save" onAction="#handleSave" styleClass="btn-primary"/>
+        <Button text="✕ Cancel" onAction="#handleCancel" styleClass="btn-outline"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" styleClass="status-label" wrapText="true"/>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="form-scroll">
+        <VBox spacing="16">
+            <padding><Insets top="8" bottom="8" left="4" right="4"/></padding>
+
+            <!-- Basic fields -->
+            <GridPane hgap="16" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints prefWidth="120"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                    <ColumnConstraints prefWidth="120"/>
+                    <ColumnConstraints prefWidth="80"/>
+                </columnConstraints>
+
+                <Label text="Title *" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="titleField" promptText="Recipe title" styleClass="form-field"
+                           GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="3"/>
+
+                <Label text="Prep Time (min)" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="prepTimeField" promptText="e.g. 15" styleClass="form-field"
+                           GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Cook Time (min)" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <TextField fx:id="cookTimeField" promptText="e.g. 30" styleClass="form-field"
+                           GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                <Label text="Servings" styleClass="form-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <TextField fx:id="servingsField" promptText="e.g. 2" styleClass="form-field"
+                           GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                <Label text="Rating (0–5)" styleClass="form-label" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+                <TextField fx:id="ratingField" promptText="e.g. 4.5" styleClass="form-field"
+                           GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <!-- Description -->
+            <VBox spacing="4">
+                <Label text="Description" styleClass="form-label"/>
+                <TextArea fx:id="descriptionArea" promptText="Brief description of the dish..."
+                          styleClass="form-field" prefHeight="70" wrapText="true"/>
+            </VBox>
+
+            <!-- Instructions -->
+            <VBox spacing="4">
+                <Label text="Instructions" styleClass="form-label"/>
+                <TextArea fx:id="instructionsArea" promptText="Step-by-step instructions..."
+                          styleClass="form-field" prefHeight="100" wrapText="true"/>
+            </VBox>
+
+            <!-- Ingredients section -->
+            <VBox spacing="8" styleClass="section-box">
+                <Label text="🧾 Ingredients" styleClass="section-label"/>
+
+                <!-- Add ingredient row -->
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <TextField fx:id="ingNameField" promptText="Name" styleClass="form-field" prefWidth="150"/>
+                    <TextField fx:id="ingQtyField"  promptText="Qty"  styleClass="form-field" prefWidth="70"/>
+                    <TextField fx:id="ingUnitField" promptText="Unit" styleClass="form-field" prefWidth="70"/>
+                    <TextField fx:id="ingPriceField" promptText="Price (VND)" styleClass="form-field" prefWidth="110"/>
+                    <Button text="+ Add" onAction="#handleAddIngredient" styleClass="btn-primary"/>
+                    <Button text="- Remove" onAction="#handleRemoveIngredient" styleClass="btn-outline"/>
+                </HBox>
+
+                <!-- Ingredients table -->
+                <TableView fx:id="ingredientTable" prefHeight="150" styleClass="ingredient-table">
+                    <columns>
+                        <TableColumn fx:id="ingNameCol"  text="Name"       prefWidth="160"/>
+                        <TableColumn fx:id="ingQtyCol"   text="Quantity"   prefWidth="80"/>
+                        <TableColumn fx:id="ingUnitCol"  text="Unit"       prefWidth="80"/>
+                        <TableColumn fx:id="ingPriceCol" text="Price (VND)" prefWidth="100"/>
+                    </columns>
+                    <placeholder><Label text="No ingredients added yet"/></placeholder>
+                </TableView>
+            </VBox>
+
+            <!-- Tags section -->
+            <VBox spacing="8" styleClass="section-box">
+                <Label text="🏷 Tags" styleClass="section-label"/>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <ComboBox fx:id="tagCombo" promptText="Select tag..." styleClass="form-field" prefWidth="200"/>
+                    <Button text="+ Add Tag"    onAction="#handleAddTag"    styleClass="btn-primary"/>
+                    <Button text="- Remove Tag" onAction="#handleRemoveTag" styleClass="btn-outline"/>
+                </HBox>
+                <ListView fx:id="selectedTagsList" prefHeight="80" styleClass="tag-list"/>
+            </VBox>
+
+        </VBox>
+    </ScrollPane>
+
+</VBox>

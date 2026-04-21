@@ -1,0 +1,35 @@
+# Maven
+target/
+
+# Environment / Secrets — NEVER commit this
+.env
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# Project specific huge assets that should NOT be pushed
+apache-maven-3.9.6/
+mariadb-portable/
+mariadb.zip
+maven.zip
+*.zip
+
+# IDE specific
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+.factorypath
+
+# Logs
+*.log

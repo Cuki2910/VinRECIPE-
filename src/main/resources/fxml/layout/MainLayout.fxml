@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.vinrecipe.controller.MainController"
+            fx:id="mainPane"
+            styleClass="main-layout">
+
+    <!-- ===== LEFT SIDEBAR ===== -->
+    <left>
+        <VBox styleClass="sidebar" spacing="4" prefWidth="220">
+            <padding><Insets top="0" right="0" bottom="16" left="0"/></padding>
+
+            <!-- App Logo/Brand -->
+            <VBox styleClass="sidebar-brand" alignment="CENTER" spacing="4">
+                <padding><Insets top="24" bottom="20" left="16" right="16"/></padding>
+                <Label text="🍽" style="-fx-font-size: 36px;"/>
+                <Label text="VinRECIPE" styleClass="sidebar-logo-text"/>
+                <Label text="Smart Recipe Planner" styleClass="sidebar-subtitle"/>
+            </VBox>
+
+            <Separator styleClass="sidebar-separator"/>
+
+            <!-- Navigation Buttons -->
+            <VBox spacing="4" styleClass="sidebar-nav">
+                <padding><Insets top="8" bottom="8" left="12" right="12"/></padding>
+
+                <Button text="🏠  Dashboard" styleClass="nav-btn, nav-btn-active"
+                        maxWidth="Infinity" onAction="#showDashboard"
+                        fx:id="dashboardBtn"/>
+
+                <Button text="🔍  Search" styleClass="nav-btn"
+                        maxWidth="Infinity" onAction="#showSearch"
+                        fx:id="searchBtn"/>
+
+                <Button text="🛒  Shopping List" styleClass="nav-btn"
+                        maxWidth="Infinity" onAction="#showShoppingList"
+                        fx:id="shoppingBtn"/>
+
+                <Separator styleClass="sidebar-separator" style="-fx-padding: 4 0 4 0;"/>
+
+                <Button text="➕  Add Recipe" styleClass="nav-btn, nav-btn-add"
+                        maxWidth="Infinity" onAction="#showAddRecipe"
+                        fx:id="addBtn"/>
+            </VBox>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Footer version info -->
+            <Label text="VinRECIPE v1.0" styleClass="sidebar-footer"
+                   alignment="CENTER" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <!-- ===== CENTER CONTENT AREA ===== -->
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area">
+            <Label text="Loading..." styleClass="placeholder-label"/>
+        </StackPane>
+    </center>
+
+</BorderPane>

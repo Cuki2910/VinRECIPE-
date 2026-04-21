@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.DashboardController"
+      styleClass="view-root" spacing="16">
+
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+
+    <!-- Header row -->
+    <HBox alignment="CENTER_LEFT" spacing="16">
+        <VBox spacing="2" HBox.hgrow="ALWAYS">
+            <Label text="Dashboard" styleClass="page-title"/>
+            <Label fx:id="userLabel" text="Welcome!" styleClass="page-subtitle"/>
+        </VBox>
+        <ComboBox fx:id="sortCombo" promptText="Sort by..." styleClass="sort-combo"
+                  prefWidth="160"/>
+        <Button text="⟳ Refresh" onAction="#handleRefresh" styleClass="btn-outline"/>
+        <Button text="➕ Add Recipe" onAction="#handleAddRecipe" styleClass="btn-primary"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" styleClass="status-label" wrapText="true"/>
+
+    <Separator/>
+
+    <!-- Recipe Grid — FlowPane for card layout -->
+    <ScrollPane fitToWidth="true" styleClass="recipe-scroll" VBox.vgrow="ALWAYS">
+        <FlowPane fx:id="recipeGrid" hgap="16" vgap="16" styleClass="recipe-grid">
+            <padding><Insets top="8" bottom="8" left="4" right="4"/></padding>
+        </FlowPane>
+    </ScrollPane>
+
+</VBox>

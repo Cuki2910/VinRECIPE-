@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.SearchController"
+      styleClass="view-root" spacing="16">
+
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+
+    <!-- Page header -->
+    <Label text="Search Recipes" styleClass="page-title"/>
+
+    <!-- Search controls -->
+    <VBox styleClass="search-panel" spacing="12">
+        <padding><Insets top="16" bottom="16" left="16" right="16"/></padding>
+
+        <!-- Search by title -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="Title:" styleClass="form-label" prefWidth="90"/>
+            <TextField fx:id="titleSearchField" promptText="e.g. Phở, Salad..."
+                       styleClass="form-field" HBox.hgrow="ALWAYS"/>
+            <Button text="Search" onAction="#handleTitleSearch" styleClass="btn-primary"/>
+        </HBox>
+
+        <!-- Search by ingredients (inverted index) -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="Ingredients:" styleClass="form-label" prefWidth="90"/>
+            <TextField fx:id="ingredientSearchField"
+                       promptText="e.g. chicken, garlic, rice (comma separated)"
+                       styleClass="form-field" HBox.hgrow="ALWAYS"/>
+            <Button text="Find" onAction="#handleIngredientSearch" styleClass="btn-primary"/>
+        </HBox>
+
+        <!-- Filter by tag -->
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <Label text="Tag Filter:" styleClass="form-label" prefWidth="90"/>
+            <ComboBox fx:id="tagFilterCombo" styleClass="form-field"
+                      onAction="#handleTagFilter" prefWidth="200"/>
+            <Button text="Clear All" onAction="#handleClear" styleClass="btn-outline"/>
+        </HBox>
+    </VBox>
+
+    <!-- Result count -->
+    <Label fx:id="resultCountLabel" styleClass="result-count"/>
+
+    <Separator/>
+
+    <!-- Results -->
+    <ScrollPane fitToWidth="true" styleClass="recipe-scroll" VBox.vgrow="ALWAYS">
+        <FlowPane fx:id="resultsPane" hgap="14" vgap="14" styleClass="recipe-grid">
+            <padding><Insets top="8" bottom="8" left="4" right="4"/></padding>
+        </FlowPane>
+    </ScrollPane>
+
+</VBox>
