@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.vinrecipe.controller.MyRoomController"
+      styleClass="view-root" spacing="16">
+
+    <padding><Insets top="24" bottom="24" left="24" right="24"/></padding>
+
+    <!-- Header -->
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="👥 My Room" styleClass="page-title" HBox.hgrow="ALWAYS"/>
+        <Label fx:id="roomIdLabel" styleClass="page-subtitle"/>
+    </HBox>
+
+    <Label fx:id="statusLabel" styleClass="page-subtitle" wrapText="true"/>
+
+    <!-- Two columns: members list + info panel -->
+    <HBox VBox.vgrow="ALWAYS" spacing="16">
+
+        <!-- Left: Members -->
+        <VBox spacing="8" styleClass="section-box" HBox.hgrow="ALWAYS">
+            <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+            <HBox alignment="CENTER_LEFT">
+                <Label text="🧑‍🤝‍🧑 Room Members" styleClass="section-label" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="memberCountLabel" styleClass="price-label"/>
+            </HBox>
+            <ListView fx:id="memberListView" VBox.vgrow="ALWAYS" styleClass="selection-list"/>
+        </VBox>
+
+        <!-- Right: Room Leader Actions -->
+        <VBox spacing="12" styleClass="section-box" prefWidth="260">
+            <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+            <Label text="👑 Leader Controls" styleClass="section-label"/>
+
+            <Label text="As Room Leader, you can:" styleClass="form-label" wrapText="true"/>
+            <Label text="• Edit or delete any recipe created by your room members"
+                   styleClass="page-subtitle" wrapText="true"/>
+            <Label text="• View all members currently in your room"
+                   styleClass="page-subtitle" wrapText="true"/>
+            <Label text="• Your recipes are also visible to all members"
+                   styleClass="page-subtitle" wrapText="true"/>
+
+            <Separator/>
+
+            <Label text="Permission Level: 2" styleClass="form-label"
+                   style="-fx-text-fill: #f39c12;"/>
+            <Label text="(Higher than Student: 1, Lower than Admin: 3)"
+                   styleClass="page-subtitle" wrapText="true"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="🏠 Go to Dashboard" onAction="#goBack"
+                    styleClass="btn-primary" maxWidth="Infinity"/>
+        </VBox>
+
+    </HBox>
+
+</VBox>

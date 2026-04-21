@@ -24,6 +24,15 @@
 
             <Separator styleClass="sidebar-separator"/>
 
+            <!-- User Info Card -->
+            <VBox fx:id="userInfoBox" styleClass="sidebar-user-card" spacing="4" alignment="CENTER">
+                <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+                <Label fx:id="userNameLabel" text="—" styleClass="sidebar-username"/>
+                <Label fx:id="userRoleBadge" text="Student" styleClass="sidebar-role-badge"/>
+            </VBox>
+
+            <Separator styleClass="sidebar-separator"/>
+
             <!-- Navigation Buttons -->
             <VBox spacing="4" styleClass="sidebar-nav">
                 <padding><Insets top="8" bottom="8" left="12" right="12"/></padding>
@@ -39,6 +48,11 @@
                 <Button text="🛒  Shopping List" styleClass="nav-btn"
                         maxWidth="Infinity" onAction="#showShoppingList"
                         fx:id="shoppingBtn"/>
+
+                <!-- Only visible for RoomLeader -->
+                <Button fx:id="myRoomBtn" text="👥  My Room" styleClass="nav-btn"
+                        maxWidth="Infinity" onAction="#showMyRoom"
+                        visible="false" managed="false"/>
 
                 <Separator styleClass="sidebar-separator" style="-fx-padding: 4 0 4 0;"/>
 

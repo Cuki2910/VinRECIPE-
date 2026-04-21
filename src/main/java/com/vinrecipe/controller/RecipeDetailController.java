@@ -67,10 +67,23 @@ public class RecipeDetailController implements ContextAware {
                             ing.getQuantity(), ing.getUnit(), capitalize(ing.getName()), ing.getPriceEstimate()));
         }
 
-        // Show edit/delete only if user is author or admin
-        boolean canModify = currentUser instanceof Admin
-                || (recipe.getAuthor() != null
-                    && recipe.getAuthor().getUserId() == currentUser.getUserId());
+        // Permission check using Polymorphism (getPermissionLevel()):
+        // Admin (level 3)        → can modify any recipe
+        // RoomLeader (level 2)   → can modify own + roommates' recipes
+        // NormalStudent (level 1) → can only modify own recipes
+        boolean isAdmin = currentUser instanceof Admin;
+        boolean isOwner = recipe.getAuthor() != null
+                && recipe.getAuthor().getUserId() == currentUser.getUserId();
+        boolean isRoomLeaderOfAuthor = false;
+        if (currentUser instanceof RoomLeader leader && recipe.getAuthor() != null) {
+            // RoomLeader can edit/delete if the recipe author is in the same room
+            User author = recipe.getAuthor();
+            if (author instanceof com.vinrecipe.model.NormalStudent student) {
+                isRoomLeaderOfAuthor = (student.getRoomId() == leader.getRoomId());
+            }
+        }
+
+        boolean canModify = isAdmin || isOwner || isRoomLeaderOfAuthor;
         editBtn.setVisible(canModify);
         deleteBtn.setVisible(canModify);
     }

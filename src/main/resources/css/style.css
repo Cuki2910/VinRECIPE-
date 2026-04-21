@@ -236,6 +236,29 @@
     -fx-padding: 0 0 8 0;
 }
 
+/* User info card in sidebar */
+.sidebar-user-card {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 10px;
+    -fx-padding: 10 12;
+    -fx-margin: 8 12;
+}
+
+.sidebar-username {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FFFFFF;
+}
+
+.sidebar-role-badge {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #3498db;
+    -fx-background-radius: 12px;
+    -fx-padding: 2 10;
+}
+
 /* ============================================================
    CONTENT AREA
    ============================================================ */

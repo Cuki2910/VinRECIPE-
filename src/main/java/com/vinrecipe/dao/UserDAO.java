@@ -78,6 +78,22 @@ public class UserDAO {
     }
 
     /**
+     * Find all users belonging to a specific room.
+     * Used by MyRoomController to list room members for the Room Leader.
+     */
+    public List<User> findByRoomId(int roomId) throws SQLException {
+        List<User> members = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE room_id = ?";
+        Connection conn = DatabaseConnection.getInstance();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, roomId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) members.add(mapRow(rs));
+        }
+        return members;
+    }
+
+    /**
      * Map a ResultSet row to the appropriate User subclass.
      * Demonstrates Polymorphism — returns different subclasses based on role.
      */
