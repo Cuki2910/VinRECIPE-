@@ -8,10 +8,13 @@ import com.vinrecipe.service.SearchService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +35,14 @@ public class MainController {
     @FXML private StackPane contentArea;
     @FXML private Label userNameLabel;
     @FXML private Label userRoleBadge;
+    
+    // Navigation Buttons
+    @FXML private Button dashboardBtn;
+    @FXML private Button searchBtn;
+    @FXML private Button shoppingBtn;
     @FXML private Button myRoomBtn;
+    @FXML private Button addBtn;
+    @FXML private Button logoutBtn;
 
     private User currentUser;
     private final RecipeService recipeService = new RecipeService();
@@ -45,7 +55,7 @@ public class MainController {
         // Load all recipes into search index
         searchService.buildIndex(recipeService.getAllRecipes());
         // Show dashboard by default
-        loadView("/fxml/views/DashboardView.fxml");
+        showDashboard();
     }
 
     /**
@@ -77,16 +87,28 @@ public class MainController {
     }
 
     /** Navigation: go to Dashboard. */
-    @FXML private void showDashboard()    { loadView("/fxml/views/DashboardView.fxml"); }
+    @FXML private void showDashboard()    { 
+        setActiveButton(dashboardBtn);
+        loadView("/fxml/views/DashboardView.fxml"); 
+    }
 
     /** Navigation: go to Search. */
-    @FXML private void showSearch()       { loadView("/fxml/views/SearchView.fxml"); }
+    @FXML private void showSearch()       { 
+        setActiveButton(searchBtn);
+        loadView("/fxml/views/SearchView.fxml"); 
+    }
 
     /** Navigation: go to Shopping List. */
-    @FXML private void showShoppingList() { loadView("/fxml/views/ShoppingListView.fxml"); }
+    @FXML private void showShoppingList() { 
+        setActiveButton(shoppingBtn);
+        loadView("/fxml/views/ShoppingListView.fxml"); 
+    }
 
     /** Navigation: go to Add New Recipe form. */
-    @FXML private void showAddRecipe()    { loadView("/fxml/views/RecipeFormView.fxml"); }
+    @FXML private void showAddRecipe()    { 
+        setActiveButton(addBtn);
+        loadView("/fxml/views/RecipeFormView.fxml"); 
+    }
 
     /**
      * My Room — only accessible to RoomLeader.
@@ -94,7 +116,21 @@ public class MainController {
      */
     @FXML
     private void showMyRoom() {
+        setActiveButton(myRoomBtn);
         loadView("/fxml/views/MyRoomView.fxml");
+    }
+
+    /** Updates the sidebar buttons so only the active one is highlighted */
+    private void setActiveButton(Button activeBtn) {
+        Button[] navButtons = {dashboardBtn, searchBtn, shoppingBtn, myRoomBtn, addBtn, logoutBtn};
+        for (Button btn : navButtons) {
+            if (btn != null) {
+                btn.getStyleClass().remove("nav-btn-active");
+            }
+        }
+        if (activeBtn != null && !activeBtn.getStyleClass().contains("nav-btn-active")) {
+            activeBtn.getStyleClass().add("nav-btn-active");
+        }
     }
 
     /**
@@ -128,4 +164,25 @@ public class MainController {
     public User getCurrentUser()          { return currentUser; }
     public RecipeService getRecipeService(){ return recipeService; }
     public SearchService getSearchService(){ return searchService; }
+
+    /** Handle Logout - Returns to Login screen */
+    @FXML
+    private void handleLogout() {
+        if (currentUser != null) {
+            currentUser.logout();
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/views/LoginView.fxml"));
+            Parent root = loader.load();
+            
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            Scene scene = new Scene(root, 1100, 700);
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/css/components.css").toExternalForm());
+            stage.setScene(scene);
+            stage.setTitle("VinRECIPE — Login");
+        } catch (IOException e) {
+            System.err.println("[MainController] Failed to load LoginView: " + e.getMessage());
+        }
+    }
 }

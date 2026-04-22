@@ -63,6 +63,14 @@
 
             <Region VBox.vgrow="ALWAYS"/>
 
+            <!-- Logout Button -->
+            <VBox spacing="4" styleClass="sidebar-nav">
+                <padding><Insets bottom="8" left="12" right="12"/></padding>
+                <Button text="🚪  Logout" styleClass="nav-btn, nav-btn-logout"
+                        maxWidth="Infinity" onAction="#handleLogout"
+                        fx:id="logoutBtn"/>
+            </VBox>
+
             <!-- Footer version info -->
             <Label text="VinRECIPE v1.0" styleClass="sidebar-footer"
                    alignment="CENTER" maxWidth="Infinity"/>

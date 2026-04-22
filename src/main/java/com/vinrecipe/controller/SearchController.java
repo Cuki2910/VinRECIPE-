@@ -48,46 +48,42 @@ public class SearchController implements ContextAware {
         renderResults(recipeService.getAllRecipes());
     }
 
-    /** Search by title keyword. */
-    @FXML
-    private void handleTitleSearch() {
-        String keyword = titleSearchField.getText().trim();
-        if (keyword.isEmpty()) {
-            renderResults(recipeService.getAllRecipes());
-        } else {
-            renderResults(recipeService.searchByTitle(keyword));
-        }
-    }
-
     /**
-     * Search by available ingredients using Inverted Index algorithm.
-     * Input: comma-separated ingredient names.
+     * Unified search supporting Title, Ingredients, and Tag filter simultaneously.
+     * Preserves Inv-Index ranking if ingredients are provided.
      */
     @FXML
-    private void handleIngredientSearch() {
-        String input = ingredientSearchField.getText().trim();
-        if (input.isEmpty()) {
-            renderResults(searchService.getAllRecipes());
-            return;
-        }
-        List<String> userIngredients = Arrays.asList(input.split(","));
-        userIngredients = userIngredients.stream()
-                .map(String::trim)
-                .filter(s -> !s.isEmpty())
-                .toList();
-        List<Recipe> results = searchService.searchByIngredients(userIngredients);
-        renderResults(results);
-    }
+    private void handleUnifiedSearch() {
+        List<Recipe> results;
 
-    /** Filter results by tag. */
-    @FXML
-    private void handleTagFilter() {
-        String selected = tagFilterCombo.getValue();
-        if (selected == null || "All Tags".equals(selected)) {
-            renderResults(recipeService.getAllRecipes());
+        // 1. Ingredients Filter (runs first to hit the inverted index and get match sorting)
+        String ingInput = ingredientSearchField.getText().trim();
+        List<String> userIngredients = Arrays.stream(ingInput.split(","))
+                .map(String::trim).filter(s -> !s.isEmpty()).toList();
+
+        if (!userIngredients.isEmpty()) {
+            results = searchService.searchByIngredients(userIngredients);
         } else {
-            renderResults(searchService.filterByTag(selected));
+            results = recipeService.getAllRecipes();
         }
+
+        // 2. Title Filter
+        String titleKeyword = titleSearchField.getText().trim().toLowerCase();
+        if (!titleKeyword.isEmpty()) {
+            results = results.stream()
+                    .filter(r -> r.getTitle().toLowerCase().contains(titleKeyword))
+                    .toList();
+        }
+
+        // 3. Tag Filter
+        String selectedTag = tagFilterCombo.getValue();
+        if (selectedTag != null && !"All Tags".equals(selectedTag)) {
+            results = results.stream()
+                    .filter(r -> r.getTags().stream().anyMatch(t -> t.getName().equalsIgnoreCase(selectedTag)))
+                    .toList();
+        }
+
+        renderResults(results);
     }
 
     @FXML
@@ -120,8 +116,11 @@ public class SearchController implements ContextAware {
 
         Label time   = new Label("⏱ " + recipe.getTotalTime() + " min");
         time.getStyleClass().add("card-meta");
+        
+        Label price = new Label("💰 " + String.format("%,.0f", recipe.getTotalPrice()) + " VND");
+        price.getStyleClass().add("card-meta");
 
-        card.getChildren().addAll(title, rating, time);
+        card.getChildren().addAll(title, rating, time, price);
         card.setOnMouseClicked(e -> showDetail(recipe));
         return card;
     }

@@ -150,7 +150,14 @@ public class RecipeFormController implements ContextAware {
             recipe.setCookTime(cookTime);
             recipe.setServings(servings);
             recipe.setRating(rating);
-            recipe.setAuthor(currentUser);
+            
+            // If editing, preserve the original author. If creating, set author to current user.
+            if (editingRecipe != null) {
+                recipe.setAuthor(editingRecipe.getAuthor());
+            } else {
+                recipe.setAuthor(currentUser);
+            }
+            
             recipe.setIngredients(new ArrayList<>(ingredients));
             recipe.setTags(new ArrayList<>(selectedTags));
 

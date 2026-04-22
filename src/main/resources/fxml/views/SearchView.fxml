@@ -22,7 +22,6 @@
             <Label text="Title:" styleClass="form-label" prefWidth="90"/>
             <TextField fx:id="titleSearchField" promptText="e.g. Phở, Salad..."
                        styleClass="form-field" HBox.hgrow="ALWAYS"/>
-            <Button text="Search" onAction="#handleTitleSearch" styleClass="btn-primary"/>
         </HBox>
 
         <!-- Search by ingredients (inverted index) -->
@@ -31,14 +30,14 @@
             <TextField fx:id="ingredientSearchField"
                        promptText="e.g. chicken, garlic, rice (comma separated)"
                        styleClass="form-field" HBox.hgrow="ALWAYS"/>
-            <Button text="Find" onAction="#handleIngredientSearch" styleClass="btn-primary"/>
         </HBox>
 
-        <!-- Filter by tag -->
+        <!-- Filter by tag & Action Buttons -->
         <HBox spacing="8" alignment="CENTER_LEFT">
             <Label text="Tag Filter:" styleClass="form-label" prefWidth="90"/>
-            <ComboBox fx:id="tagFilterCombo" styleClass="form-field"
-                      onAction="#handleTagFilter" prefWidth="200"/>
+            <ComboBox fx:id="tagFilterCombo" styleClass="form-field" prefWidth="200"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Search" onAction="#handleUnifiedSearch" styleClass="btn-primary"/>
             <Button text="Clear All" onAction="#handleClear" styleClass="btn-outline"/>
         </HBox>
     </VBox>

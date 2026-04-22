@@ -1,8 +1,8 @@
 /* =============================================================
    VinRECIPE — Main Stylesheet
    Color palette:
-     Primary:     #2ECC71 (green)
-     Dark:        #1A1D2E (sidebar)
+     Primary:     #C8102E (VinUni Red)
+     Dark:        #102E5C (VinUni Blue)
      Background:  #F0F2F5 (main bg)
      Surface:     #FFFFFF (cards)
      Text:        #1F2937 (dark)
@@ -20,7 +20,7 @@
    ============================================================ */
 
 .login-root {
-    -fx-background-color: linear-gradient(to bottom right, #1A1D2E, #2D364D);
+    -fx-background-color: linear-gradient(to bottom right, #102E5C, #0B1C38);
 }
 
 .login-card {
@@ -37,7 +37,7 @@
 .login-app-name {
     -fx-font-size: 28px;
     -fx-font-weight: bold;
-    -fx-text-fill: #1A1D2E;
+    -fx-text-fill: #C8102E;
 }
 
 .login-tagline {
@@ -65,9 +65,9 @@
 }
 
 .form-field:focused {
-    -fx-border-color: #2ECC71;
+    -fx-border-color: #102E5C;
     -fx-background-color: #FFFFFF;
-    -fx-effect: dropshadow(gaussian, rgba(46,204,113,0.25), 6, 0, 0, 0);
+    -fx-effect: dropshadow(gaussian, rgba(16,46,92,0.25), 6, 0, 0, 0);
 }
 
 /* ============================================================
@@ -75,7 +75,7 @@
    ============================================================ */
 
 .btn-primary {
-    -fx-background-color: #2ECC71;
+    -fx-background-color: #C8102E;
     -fx-text-fill: #FFFFFF;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
@@ -85,19 +85,19 @@
 }
 
 .btn-primary:hover {
-    -fx-background-color: #27AE60;
-    -fx-effect: dropshadow(gaussian, rgba(46,204,113,0.4), 8, 0, 0, 2);
+    -fx-background-color: #AB0D26;
+    -fx-effect: dropshadow(gaussian, rgba(200,16,46,0.3), 8, 0, 0, 2);
 }
 
 .btn-primary:pressed {
-    -fx-background-color: #219A52;
+    -fx-background-color: #8C0B1F;
 }
 
 .btn-secondary {
     -fx-background-color: transparent;
-    -fx-text-fill: #2ECC71;
+    -fx-text-fill: #102E5C;
     -fx-font-size: 14px;
-    -fx-border-color: #2ECC71;
+    -fx-border-color: #102E5C;
     -fx-border-radius: 8px;
     -fx-background-radius: 8px;
     -fx-padding: 7 20;
@@ -105,7 +105,7 @@
 }
 
 .btn-secondary:hover {
-    -fx-background-color: rgba(46,204,113,0.08);
+    -fx-background-color: rgba(16,46,92,0.08);
 }
 
 .btn-outline {
@@ -154,14 +154,14 @@
 }
 
 .toggle-link {
-    -fx-text-fill: #2ECC71;
+    -fx-text-fill: #102E5C;
     -fx-font-size: 13px;
     -fx-cursor: hand;
     -fx-underline: true;
 }
 
 .toggle-link:hover {
-    -fx-text-fill: #27AE60;
+    -fx-text-fill: #C8102E;
 }
 
 /* ============================================================
@@ -173,12 +173,12 @@
 }
 
 .sidebar {
-    -fx-background-color: #1A1D2E;
+    -fx-background-color: #102E5C;
     -fx-min-width: 220px;
 }
 
 .sidebar-brand {
-    -fx-background-color: #141624;
+    -fx-background-color: #0A1C38;
 }
 
 .sidebar-logo-text {
@@ -216,18 +216,20 @@
 }
 
 .nav-btn-active {
-    -fx-background-color: rgba(46,204,113,0.15);
-    -fx-text-fill: #2ECC71;
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-text-fill: #FFFFFF;
+    -fx-border-color: #C8102E;
+    -fx-border-width: 0 0 0 4;
 }
 
 .nav-btn-add {
-    -fx-background-color: #2ECC71;
+    -fx-background-color: #C8102E;
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
 
 .nav-btn-add:hover {
-    -fx-background-color: #27AE60;
+    -fx-background-color: #AB0D26;
 }
 
 .sidebar-footer {
@@ -312,7 +314,7 @@
 }
 
 .recipe-card:hover {
-    -fx-effect: dropshadow(gaussian, rgba(46,204,113,0.25), 12, 0, 0, 4);
+    -fx-effect: dropshadow(gaussian, rgba(16,46,92,0.2), 12, 0, 0, 4);
     -fx-translate-y: -2;
     -fx-background-color: #FEFFFE;
 }
@@ -337,7 +339,7 @@
 
 .card-tags {
     -fx-font-size: 11px;
-    -fx-text-fill: #2ECC71;
+    -fx-text-fill: #C8102E;
     -fx-wrap-text: true;
 }
 
@@ -384,7 +386,7 @@
 
 .detail-tags {
     -fx-font-size: 13px;
-    -fx-text-fill: #2ECC71;
+    -fx-text-fill: #C8102E;
     -fx-padding: 0;
 }
 
@@ -464,7 +466,7 @@
 .price-label {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2ECC71;
+    -fx-text-fill: #C8102E;
 }
 
 /* ============================================================
@@ -502,11 +504,16 @@
 }
 
 /* ListView item hover */
-.list-cell:filled:hover {
-    -fx-background-color: #F0FDF4;
+.list-cell {
+    -fx-text-fill: #1F2937;
 }
 
-.list-cell:filled:selected {
-    -fx-background-color: #DCFCE7;
-    -fx-text-fill: #166534;
+.list-cell:filled:hover {
+    -fx-background-color: #F3F4F6;
+    -fx-text-fill: #1F2937;
+}
+
+.list-cell:filled:selected, .list-cell:filled:selected:hover {
+    -fx-background-color: #102E5C;
+    -fx-text-fill: #FFFFFF;
 }

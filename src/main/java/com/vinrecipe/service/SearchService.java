@@ -55,9 +55,18 @@ public class SearchService {
         Map<Recipe, Integer> matchCount = new HashMap<>();
 
         for (String userIng : userIngredients) {
-            String key = userIng.toLowerCase().trim();
-            List<Recipe> matches = invertedIndex.getOrDefault(key, Collections.emptyList());
-            for (Recipe recipe : matches) {
+            String searchWord = userIng.toLowerCase().trim();
+            
+            // Set of recipes matched for this specific searchWord to avoid double counting
+            Set<Recipe> matchedForThisWord = new HashSet<>();
+            
+            for (Map.Entry<String, List<Recipe>> entry : invertedIndex.entrySet()) {
+                if (entry.getKey().contains(searchWord)) {
+                    matchedForThisWord.addAll(entry.getValue());
+                }
+            }
+            
+            for (Recipe recipe : matchedForThisWord) {
                 matchCount.merge(recipe, 1, Integer::sum);
             }
         }
@@ -111,11 +120,11 @@ public class SearchService {
     }
 
     /**
-     * Sort all recipes by prep time (ASC).
+     * Sort all recipes by total time (ASC).
      */
     public List<Recipe> sortByPrepTime(List<Recipe> recipes) {
         List<Recipe> sorted = new ArrayList<>(recipes);
-        sorted.sort(Comparator.comparingInt(Recipe::getPrepTime));
+        sorted.sort(Comparator.comparingInt(Recipe::getTotalTime));
         return sorted;
     }
 

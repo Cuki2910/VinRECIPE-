@@ -21,14 +21,29 @@
     <!-- Two columns: members list + info panel -->
     <HBox VBox.vgrow="ALWAYS" spacing="16">
 
-        <!-- Left: Members -->
-        <VBox spacing="8" styleClass="section-box" HBox.hgrow="ALWAYS">
-            <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
-            <HBox alignment="CENTER_LEFT">
-                <Label text="🧑‍🤝‍🧑 Room Members" styleClass="section-label" HBox.hgrow="ALWAYS"/>
-                <Label fx:id="memberCountLabel" styleClass="price-label"/>
-            </HBox>
-            <ListView fx:id="memberListView" VBox.vgrow="ALWAYS" styleClass="selection-list"/>
+        <!-- Left: Members & Recipes -->
+        <VBox alignment="TOP_CENTER" spacing="16" HBox.hgrow="ALWAYS">
+            
+            <!-- Members List -->
+            <VBox spacing="8" styleClass="section-box" VBox.vgrow="ALWAYS">
+                <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="🧑‍🤝‍🧑 Room Members" styleClass="section-label" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="memberCountLabel" styleClass="price-label"/>
+                </HBox>
+                <ListView fx:id="memberListView" VBox.vgrow="ALWAYS" styleClass="selection-list"/>
+            </VBox>
+
+            <!-- Room Recipes List -->
+            <VBox spacing="8" styleClass="section-box" VBox.vgrow="ALWAYS">
+                <padding><Insets top="12" bottom="12" left="12" right="12"/></padding>
+                <HBox alignment="CENTER_LEFT">
+                    <Label text="🍲 Room Recipes" styleClass="section-label" HBox.hgrow="ALWAYS"/>
+                    <Label fx:id="recipeCountLabel" styleClass="price-label"/>
+                </HBox>
+                <ListView fx:id="recipeListView" VBox.vgrow="ALWAYS" styleClass="selection-list"/>
+            </VBox>
+            
         </VBox>
 
         <!-- Right: Room Leader Actions -->

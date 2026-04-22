@@ -33,6 +33,14 @@ public abstract class User {
     public abstract int getPermissionLevel();
 
     /**
+     * Returns the room ID this user belongs to.
+     * Overridden by subclasses (NormalStudent, RoomLeader) that participate in rooms.
+     */
+    public int getRoomId() {
+        return 0; // Default: not in a room.
+    }
+
+    /**
      * Simulates login logic: validate credentials.
      * Subclasses may override for additional checks — Polymorphism.
      */

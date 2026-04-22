@@ -16,6 +16,7 @@ public class RecipeDAO {
 
     private final IngredientDAO ingredientDAO = new IngredientDAO();
     private final TagDAO tagDAO               = new TagDAO();
+    private final UserDAO userDAO             = new UserDAO();
 
     /** Insert a new recipe and return its generated recipe_id. */
     public int insert(Recipe recipe) throws SQLException {
@@ -154,6 +155,12 @@ public class RecipeDAO {
         r.setRating(rs.getDouble("rating"));
         r.setServings(rs.getInt("servings"));
         r.setImageUrl(rs.getString("image_url"));
+        
+        int authorId = rs.getInt("author_id");
+        if (!rs.wasNull()) {
+            r.setAuthor(userDAO.findById(authorId));
+        }
+        
         return r;
     }
 }

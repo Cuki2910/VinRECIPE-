@@ -102,6 +102,10 @@ public class DashboardController implements ContextAware {
         Label time = new Label("⏱ " + recipe.getTotalTime() + " min");
         time.getStyleClass().add("card-meta");
 
+        // Price
+        Label price = new Label("💰 " + String.format("%,.0f", recipe.getTotalPrice()) + " VND");
+        price.getStyleClass().add("card-meta");
+
         // Author
         String authorName = recipe.getAuthor() != null ? recipe.getAuthor().getUsername() : "Unknown";
         Label author = new Label("👤 " + authorName);
@@ -118,7 +122,7 @@ public class DashboardController implements ContextAware {
             tags.setWrapText(true);
         }
 
-        card.getChildren().addAll(title, rating, time, author, tags);
+        card.getChildren().addAll(title, rating, time, price, author, tags);
 
         // Click → show detail
         card.setOnMouseClicked(event -> showDetail(recipe));

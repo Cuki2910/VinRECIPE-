@@ -78,9 +78,7 @@ public class RecipeDetailController implements ContextAware {
         if (currentUser instanceof RoomLeader leader && recipe.getAuthor() != null) {
             // RoomLeader can edit/delete if the recipe author is in the same room
             User author = recipe.getAuthor();
-            if (author instanceof com.vinrecipe.model.NormalStudent student) {
-                isRoomLeaderOfAuthor = (student.getRoomId() == leader.getRoomId());
-            }
+            isRoomLeaderOfAuthor = author.getRoomId() > 0 && author.getRoomId() == leader.getRoomId();
         }
 
         boolean canModify = isAdmin || isOwner || isRoomLeaderOfAuthor;
